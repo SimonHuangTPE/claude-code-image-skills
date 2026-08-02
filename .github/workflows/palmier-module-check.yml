@@ -1,0 +1,34 @@
+name: Palmier module check
+
+on:
+  pull_request:
+    paths:
+      - 'palmier/**'
+      - '.github/workflows/palmier-module-check.yml'
+  push:
+    paths:
+      - 'palmier/**'
+
+jobs:
+  validate:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shell syntax
+        run: |
+          bash -n palmier/scripts/check-environment.sh
+          bash -n palmier/scripts/install-local.sh
+      - name: Check required delivery files
+        run: |
+          test -f palmier/README.md
+          test -f palmier/mcp/README.md
+          test -f palmier/skills/palmier-video-edit/SKILL.md
+          test -f palmier/templates/60s-vertical-short.prompt.md
+          test -f palmier/templates/test-package/manifest.yaml
+          test -f palmier/benchmark/acceptance-test.md
+          test -f palmier/DELIVERY-CHECKLIST.md
+      - name: Check mandatory acceptance gates
+        run: |
+          grep -q 'Editable Palmier project' palmier/benchmark/acceptance-test.md
+          grep -q 'Only a flattened MP4' palmier/benchmark/acceptance-test.md
+          grep -q 'minimum_score: 80' palmier/templates/test-package/manifest.yaml

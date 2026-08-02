@@ -1,0 +1,39 @@
+project:
+  name: 4wheels-palmier-60s-test
+  format: vertical-short
+  resolution: 1080x1920
+  fps: 30
+  duration_target_seconds: 50
+
+assets:
+  talking_head: assets/talking-head.mp4
+  broll_directory: assets/broll
+  logo: assets/logo.png
+  music: assets/music.mp3
+
+editing:
+  remove_dead_air_over_seconds: 0.45
+  minimum_broll_placements: 3
+  caption_language: zh-TW
+  caption_style: 4Wheels Standard
+  preserve_source_media: true
+  require_editable_timeline: true
+
+tracks:
+  - dialogue
+  - broll
+  - captions
+  - branding
+  - music
+
+export:
+  codec: h264
+  container: mp4
+  audio_codec: aac
+  output: output/4wheels-palmier-test-v1.mp4
+
+acceptance:
+  minimum_score: 80
+  manual_caption_edit_required: true
+  manual_broll_move_required: true
+  second_export_required: true
