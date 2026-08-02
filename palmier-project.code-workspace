@@ -1,0 +1,10 @@
+{
+  "folders": [
+    { "name": "palmier-project", "path": "." }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true
+    }
+  }
+}
